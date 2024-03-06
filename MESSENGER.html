@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MESSENGER</title>
+    <link rel="stylesheet" href="vendor_style.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            height: 100vh;
+        }
+
+        #chat-container {
+            max-width: 400px;
+            margin: 20px auto;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        }
+
+        #chat-messages {
+            padding: 10px;
+            overflow-y: scroll;
+            max-height: 300px;
+            height: 100vh;
+        }
+
+        #user-input {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: #fff;
+            border-top: 1px solid #ccc;
+        }
+
+        #message-input {
+            flex: 1;
+            padding: 8px;
+            margin-right: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        #send-button {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        @media screen and (max-width: 768px) {
+
+.main-content{
+    margin-left: 0px;
+}
+}
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- header or nav -->
+        <nav class="header">
+            <div class="logo"><a class="logoLink" href="VENDOR_DB.html"><img src="logo.png" alt="QuantaRock"
+                        class="logoImage"></a></div>
+            <div>
+                <li class="Vendor_nevbar_Right">
+                    <a href="CART.html"> <i class="fa-solid fa-cart-shopping" style="color: #fff"></i></a>
+                    <A href="PROFILE.html"><button class="btn"> Vendor</button></A>
+                </li>
+
+            </div>
+        </nav>
+        <div class="hamburger" onclick="toggleSidebar()">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+        <!-- sidebar  -->
+        <aside class="sidebar">
+            <li><a href="VENDOR_DB.html"><i class="fa-solid fa-gauge"></i>DASHBOARD</a></li>
+            <li><a href="MESSENGER.html"><i class="fa-solid fa-message"></i>MESSAGES</a></li>
+            <li><a href="ORDER LIST.html"><i class="fa-solid fa-cart-shopping"></i>ORDER LIST</a></li>
+            <li><a href="SETTING_01.html"><i class="fa-solid fa-gear"></i>SETTING</a></li>
+            <li><a href="PAYMENT.html"><i class="fa-solid fa-money-check-dollar"></i>PAYMENT</a></li>
+            <li><a href="index.html"><i class="fa-solid fa-right-from-bracket"></i>LOGOUT</a></li>
+        </aside>
+        <!-- chatbox -->
+        <div class="main-content" id="chat-container">
+            <h2>Ask Your Query.</h2>  
+            <div id="chat-messages"></div>
+                      
+            <div id="user-input">
+                <input type="text" id="message-input" placeholder="Type your message...">
+                <button id="send-button" onclick="sendMessage()">Send</button>
+            </div>
+
+        </div>
+
+
+        <script>
+            const socket = new WebSocket('ws://localhost:3000');
+
+            socket.addEventListener('message', (event) => {
+                const message = JSON.parse(event.data);
+                appendMessage(message.sender, message.text, 'incoming');
+            });
+
+            function sendMessage() {
+                const messageInput = document.getElementById('message-input');
+                const message = messageInput.value.trim();
+
+                if (message !== '') {
+                    appendMessage('Vendor', message, 'outgoing');
+                    socket.send(JSON.stringify({ sender: 'Vendor', text: message }));
+                    messageInput.value = '';
+                }
+            }
+
+            function appendMessage(sender, text, type) {
+                const chatMessages = document.getElementById('chat-messages');
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message ' + type;
+                messageDiv.innerHTML = '<strong>' + sender + ':</strong> ' + text;
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            function toggleSidebar() {
+                var sidebar = document.querySelector('.sidebar');
+                sidebar.classList.toggle('hidden');
+            }
+
+        </script>
+</body>
+
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <style>
+
+        thead > tr *, tbody > tr *{
+            font-size: 15px;
+        }
+
+    #add-product-btn {
+      background-color: #3498db;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      margin: 10px;
+      position: absolute;
+      right: 10px;
+      top: 70px;
+      
+    }
+
+    #add-product-btn:hover {
+      background-color: #2ecc71;
+    }
+
+    #add-product-btn span {
+      margin-right: 5px;
+    }
+
+    @media screen and (max-width: 405px) {
+  #add-product-btn {
+    margin: 5px;
+    right: 5px;
+    top: 60px;
+    z-index: 20;
+  }
+  .listItems {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+}
+
+@media screen and (min-width: 405px) and (max-width: 768px){
+    #add-product-btn {
+    margin: 5px;
+    position: absolute;
+    right: 5px;
+    top: 65px;
+    z-index: 20;
+  }
+}
+
+
+</style>
+</head>
+<body>
+    <div class="container">
+        <!-- header or nav -->
+        <nav class="header">
+            <div class="hamburger" onclick="toggleSidebar()">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+            <div class="logo"><a class="logoLink" href="Admin_Dashboard.html"><img src="logo.png" alt="QuantaRock" class="logoImage"></a>
+            </div>
+                <div class="dropdown"><button class="dropbtn"> Admin <i class="fa-solid fa-caret-down"></i></button>
+                    <div class="dropdown-content"><a href="index.html">Logout</a></div>
+                </div>
+            </div>
+        </nav>
+
+
+        <aside class="sidebar">
+            <li><a href="Admin_Dashboard.html"><i class="fa-solid fa-gauge"></i>DASHBOARD</a></li>
+            <li><a href="Admin_New_Request.html"><i class="fa-solid fa-plus"></i>NEW REQUEST</a></li>
+            <li><a href="Admin_Vendor_list.html"><i class="fa-solid fa-user-plus"></i>VENDORS LIST</a></li>
+            <li><a href="Admin_KYC.html"><i class="fa-solid fa-handshake"></i>KYC DETAILS</a></li>
+            <li><a href="Admin_Messege.html"><i class="fa-solid fa-message"></i>MESSAGES</a></li>
+            <li><a href="Admin_PRODUCT_LIST.HTML"><i class="fa-solid fa-store"></i>PRODUCTS</a></li>
+        </aside>
+
+
+
+        <!-- Your main content here -->
+        <button id="add-product-btn">
+            <a href="Admin_ADDNewProduct.html"> <span>+</span>
+                Add Product</a>
+        </button>
+        
+        <div id="table">
+            <div class="listItems">
+                <h3>PRODUCT LIST</h3><i class="fa-solid fa-store"></i>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Image</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-column="ID">1</td>
+                        <td data-column="Product Name">Product A</td>
+                        <td data-column="Price">$20.00</td>
+                        <td data-column="Quantity">10</td>
+                        <td data-column="Image"><img height="50px" src="logo.png" alt="Product Image"></td>
+                        <td data-column="Status"><button onclick="toggleStatus(1)">Enable</button></td>
+                    </tr>
+                    <tr>
+                        <td data-column="ID">2</td>
+                        <td data-column="Product Name">Product B</td>
+                        <td data-column="Price">$15.00</td>
+                        <td data-column="Quantity">15</td>
+                        <td data-column="Image"><img height="50px" src="logo.png" alt="Product Image"></td>
+                        <td data-column="Status"><button onclick="toggleStatus(0)">Enable</button></td>
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+   
+        <script>
+            function toggleStatus(productId) {
+                var statusCell = document.querySelector(`#status_${productId}`);
+                var currentStatus = statusCell.innerText.trim().toLowerCase();
+        
+                if (currentStatus === 'enable') {
+                    statusCell.innerText = 'Disable';
+                } else {
+                    statusCell.innerText = 'Enable';
+                }
+            }
+        </script>
+        <script src="script.js"></script>
+</body>
+
+</html>

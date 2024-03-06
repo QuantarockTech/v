@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORDER LIST</title>
+    <link rel="stylesheet" href="vendor_style.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            /* margin: 20px; */
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        select {
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        
+
+        @media screen and (max-width: 768px) {
+
+            .main-content {
+                margin-left: 0px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- header or nav -->
+        <nav class="header">
+            <div class="hamburger" onclick="toggleSidebar()">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+            <div class="logo"><a class="logoLink" href="VENDOR_DB.html"><img src="logo.png" alt="QuantaRock"
+                        class="logoImage"></a></div>
+            <div>
+                <li class="Vendor_nevbar_Right">
+                    <a href="CART.html"> <i class="fa-solid fa-cart-shopping" style="color: #fff"></i></a>
+                    <A href="PROFILE.html"><button class="btn"> Vendor</button></A>
+                </li>
+            </div>
+        </nav>
+
+        <!-- sidebar  -->
+        <aside class="sidebar">
+            <li><a href="VENDOR_DB.html"><i class="fa-solid fa-gauge"></i>DASHBOARD</a></li>
+            <li><a href="MESSENGER.html"><i class="fa-solid fa-message"></i>MESSAGES</a></li>
+            <li><a href="ORDER LIST.html"><i class="fa-solid fa-cart-shopping"></i>ORDER LIST</a></li>
+            <li><a href="SETTING_01.html"><i class="fa-solid fa-gear"></i>SETTING</a></li>
+            <li><a href="PAYMENT.html"><i class="fa-solid fa-money-check-dollar"></i>PAYMENT</a></li>
+            <li><a href="index.html"><i class="fa-solid fa-right-from-bracket"></i>LOGOUT</a></li>
+        </aside>
+
+        <div class="main-content">
+
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>John Doe</td>
+                        <td>2024-03-05</td>
+                        <td>
+                            <select onchange="updateStatus( this.value , 1)">
+                                <option value="1">Select</option>
+                                <option value="complete">Complete</option>
+                                <option value="process">Process</option>
+                                <option value="reject">Reject</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
+        </div>
+
+        <script>
+            function updateStatus(status, id) {
+                if (status === "1") {
+                    // Handle the case when "Select" is chosen
+                    alert("Please select a valid status.");
+                } else {
+                    // Handle status update (you can customize this function)
+                    alert(`Updated status to ${status} for ID ${id}`);
+
+                    // Update the UI or send the status update to the server
+                }
+            }
+        </script>
+
+
+        <script>
+            function toggleSidebar() {
+                var sidebar = document.querySelector('.sidebar');
+                sidebar.classList.toggle('hidden');
+            }
+        </script>
+
+</body>
+
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MY PROFILE</title>
+    <link rel="stylesheet" href="vendor_style.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            height: 100vh;
+        }
+
+        header {
+            background-color: #a958bd56;
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .vendorProfile {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(255, 0, 162, 0.384);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        h1 {
+            color: #000000;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        @media screen and (max-width: 768px) {
+            .main-content {
+                margin-left: 0px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- header or nav -->
+        <nav class="header">
+            <div class="hamburger" onclick="toggleSidebar()">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+            <div class="logo"><a class="logoLink" href="VENDOR_DB.html"><img src="logo.png" alt="QuantaRock"
+                        class="logoImage"></a></div>
+            <div>
+                <li class="Vendor_nevbar_Right">
+                    <a href="CART.html"> <i class="fa-solid fa-cart-shopping" style="color: #fff"></i></a>
+                    <A href="PROFILE.html"><button class="btn"> Vendor</button></A>
+                </li>
+
+            </div>
+        </nav>
+        <!-- sidebar  -->
+        <aside class="sidebar">
+            <li><a href="VENDOR_DB.html"><i class="fa-solid fa-gauge"></i>DASHBOARD</a></li>
+            <li><a href="MESSENGER.html"><i class="fa-solid fa-message"></i>MESSAGES</a></li>
+            <li><a href="ORDER LIST.html"><i class="fa-solid fa-cart-shopping"></i>ORDER LIST</a></li>
+            <li><a href="SETTING_01.html"><i class="fa-solid fa-gear"></i>SETTING</a></li>
+            <li><a href="PAYMENT.html"><i class="fa-solid fa-money-check-dollar"></i>PAYMENT</a></li>
+            <li><a href="index.html"><i class="fa-solid fa-right-from-bracket"></i>LOGOUT</a></li>
+        </aside>
+
+        <div class="main-content">
+            <div class="vendorProfile">
+                <h1>Vendor Details</h1>
+                <main>
+                    <p><strong>Name:</strong> XYZ Corporation</p>
+                    <p><strong>Contact Person:</strong> John Doe</p>
+                    <p><strong>Email:</strong> john.doe@example.com</p>
+                    <p><strong>Phone:</strong> +1 (555) 123-4567</p>
+                    <p><strong>Address:</strong> 123 Main Street, Cityville, State, Country</p>
+                </main>
+                <a href="SETTING_01.html"></a><button type="button">Settings</button></a>
+            </div>
+
+            <!-- detail form  -->
+
+
+        </div>
+
+        <script>
+            function toggleSidebar() {
+                var sidebar = document.querySelector('.sidebar');
+                sidebar.classList.toggle('hidden');
+            }
+
+        </script>
+</body>
+
+</html>

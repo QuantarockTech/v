@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor_DB</title>
+    <link rel="stylesheet" href="vendor_style.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            overflow-x: auto;
+        }
+
+        th,
+        td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 12px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .add-button {
+            padding: 10px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            transition-duration: 0.4s;
+        }
+
+        .add-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fefefe;
+            padding: 20px;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+
+        .add-popup input {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .add-popup button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .add-popup button:hover {
+            background-color: white;
+            color: #4CAF50;
+            border: 1px solid #4CAF50;
+        }
+
+        .close-button {
+            color: #4CAF50;
+            float: right;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-button:hover {
+            color: #f44336;
+        }
+
+        @media screen and (max-width: 768px) {
+
+            .main-content {
+                margin-left: 0px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- header or nav -->
+        <nav class="header">
+            <div class="hamburger" onclick="toggleSidebar()">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+            <div class="logo"><a class="logoLink" href="VENDOR_DB.html"><img src="logo.png" alt="QuantaRock"
+                        class="logoImage"></a></div>
+            <div>
+                <li class="Vendor_nevbar_Right">
+                    <a href="CART.html"> <i class="fa-solid fa-cart-shopping" style="color: #fff"></i></a>
+                    <A href="PROFILE.html"><button class="btn"> Vendor</button></A>
+                </li>
+
+            </div>
+        </nav>
+        <!-- sidebar  -->
+        <aside class="sidebar">
+            <li><a href="VENDOR_DB.html"><i class="fa-solid fa-gauge"></i>DASHBOARD</a></li>
+            <li><a href="MESSENGER.html"><i class="fa-solid fa-message"></i>MESSAGES</a></li>
+            <li><a href="ORDER LIST.html"><i class="fa-solid fa-cart-shopping"></i>ORDER LIST</a></li>
+            <li><a href="SETTING_01.html"><i class="fa-solid fa-gear"></i>SETTING</a></li>
+            <li><a href="PAYMENT.html"><i class="fa-solid fa-money-check-dollar"></i>PAYMENT</a></li>
+            <li><a href="index.html"><i class="fa-solid fa-right-from-bracket"></i>LOGOUT</a></li>
+        </aside>
+
+        <div class="main-content">
+
+            <div style="overflow-x:auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>IMAGE</th>
+                            <th>NAME</th>
+                            <th>PRICE</th>
+                            <!-- <th>Descripton</th> -->
+
+                            <th>ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                        <!-- Table rows will be dynamically added here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="addPopup" class="add-popup">
+                <span class="close-button" onclick="closeAddPopup()">&times;</span>
+                <label for="quantity">Enter Quantity:</label>
+                <input type="number" id="quantity" name="quantity" min="1" value="1">
+                <button onclick="addToCart()">Add to Cart</button>
+            </div>
+        </div>
+
+
+        <script>
+            // Sample data for demonstration
+            const products = [
+                { image: 'image1.jpg', name: 'Product 1', price: 2.99 },
+                { image: 'image2.jpg', name: 'Product 2', price: 30.49 },
+                { image: 'image3.jpg', name: 'Product 3', price: 15.99 },
+            ];
+
+            const tableBody = document.getElementById('table-body');
+            const addPopup = document.getElementById('addPopup');
+
+            // Function to add a row to the table
+            function addRow(product) {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+      <td><img src="${product.image}" alt="${product.name}" width="50"></td>
+      <td>${product.name}</td>
+      <td>${product.price.toFixed(2)}</td>
+      <td class="action-buttons">
+        <button class="add-button" onclick="openAddPopup()">ADD</button>
+      </td>
+    `;
+                tableBody.appendChild(row);
+            }
+
+            // Function to populate the table with sample data
+            function populateTable() {
+                products.forEach(product => addRow(product));
+            }
+
+            // Initialize the table
+            populateTable();
+
+            // Function to open the add popup
+            function openAddPopup() {
+                addPopup.style.display = 'block';
+            }
+
+            // Function to close the add popup
+            function closeAddPopup() {
+                addPopup.style.display = 'none';
+            }
+
+            // Function to add to cart (placeholder)
+            function addToCart() {
+                const quantity = document.getElementById('quantity').value;
+                alert(`Added to cart: ${quantity} items`);
+                closeAddPopup();
+            }
+            function toggleSidebar() {
+                var sidebar = document.querySelector('.sidebar');
+                sidebar.classList.toggle('hidden');
+            }
+
+            // table css
+
+        </script>
+</body>
+
+</html>
